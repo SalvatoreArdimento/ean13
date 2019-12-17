@@ -41,7 +41,7 @@ public class CardNumber {
             else
                 sum += Integer.parseInt(String.valueOf(cardNo.charAt(i))) * 3;       // Somma le cifre di posto dispari moltiplicato 3
         }
-        // System.out.print(sum + "\n");                // Solo DEBUG       TODO: Rimuovere
+         System.out.print(sum + "\n");                // Solo DEBUG       TODO: Rimuovere
 
         if ((sum % 10) == 0)
             return 0;
@@ -59,12 +59,13 @@ public class CardNumber {
      * @return
      */
     public String getFullCardNumber() {
-        return "";
+        return cardNo+this.checkSum();
     }
 
 
     public String getCardNo() { return cardNo; }
     public void setCardNo(String cardNo) { this.cardNo = cardNo; }
+
 }
 
 
