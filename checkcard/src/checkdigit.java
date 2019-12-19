@@ -11,15 +11,19 @@ public class checkdigit {
 
         for (String i : carteInput) {
             cardnumber.setCardNo(i);
-            if (cardnumber.isLegal())
+            if (cardnumber.isLengthCorrect())
                 carteOutput[y] = cardnumber.getFullCardNumber();
             y++;
         }
 
         for (String x : carteOutput) {
             System.out.println(x + "\n");
-
         }
+
+        for (int i=0; i<carteInput.length; i++) {
+            System.out.println(" | " + carteInput[i] + " | " + carteOutput[i] + " | " );
+        }
+
     }
 
 

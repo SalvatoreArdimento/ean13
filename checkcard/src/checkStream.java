@@ -1,9 +1,6 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-public class Stream {
+public class checkStream {
     public static void main(String[] args) throws IOException {
         CardNumber cardNumber = new CardNumber("");
         int i;
@@ -17,7 +14,7 @@ public class Stream {
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileOut, true));
         for (i = 0; i < lines; i++) {
             cardNumber.setCardNo(reader2.readLine());
-            if (cardNumber.isLegal()) {
+            if (cardNumber.isLengthCorrect()) {
                 writer.append(" ");
                 writer.append(cardNumber.getFullCardNumber());
             } else

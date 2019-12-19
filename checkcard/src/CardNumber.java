@@ -1,5 +1,6 @@
-import java.util.Scanner;
-
+/**
+ * Documentazione della classe
+ */
 public class CardNumber {
     private String cardNo;
 
@@ -51,7 +52,11 @@ public class CardNumber {
 
     }
 
-    public boolean isLegal() {
+    /**
+     *
+     * @return
+     */
+    public boolean isLengthCorrect() {
         return cardNo.length() == 12;
     }
 
@@ -74,7 +79,7 @@ public class CardNumber {
     }
 
     public boolean isCorrect() {
-        if(this.isLegal()) {
+        if(this.isLengthCorrect()) {
             String noCheckSumCode;
             int x = Integer.parseInt(this.cardNo.substring(cardNo.length() - 1));
             noCheckSumCode = cardNo.substring(0, cardNo.length() - 1);
@@ -82,23 +87,13 @@ public class CardNumber {
             return test.checkSum() == x;
         }
         return false;
-
-
-
     }
-    public static boolean isCorrect(String s) {
-        CardNumber test = new CardNumber(s);
-        if(test.isLegal()) {
-            String noCheckSumCode;
-            int x = Integer.parseInt(test.cardNo.substring(test.cardNo.length() - 1));
-            noCheckSumCode = test.cardNo.substring(0, test.cardNo.length() - 1);
-            test.setCardNo(noCheckSumCode);
-            return test.checkSum() == x;
-        }
-        return false;
 
 
 
+    public static boolean isCorrect(String inCard) {
+        CardNumber thisCard = new CardNumber(inCard);
+        return (thisCard.isCorrect());
     }
 }
 
