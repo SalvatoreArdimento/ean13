@@ -1,0 +1,40 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class provaListe {
+    public static void main(String[] args) throws IOException {
+        String s;
+        int i;
+        CardNumber cardNumber = new CardNumber("");
+        File fileIn = new File("./in.txt");
+        File fileOut = new File("./out.txt");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileOut, true));
+        BufferedReader reader = new BufferedReader(new FileReader(fileIn));
+        List<String> listIn = new ArrayList<String>();
+        List<String> listOut = new ArrayList<String>();
+        do
+        {                                                            //Prendo dal codici dal file e li inserisco nella lista listaIn
+            s = reader.readLine();
+            if (s != null) {
+                listIn.add(s);
+
+            }
+        } while (s != null);
+        for (i = 0; i < listIn.size(); i++) {                        //Uso l'oggetto 'cardnumber' usando i codici di listaIn e inserisco i codici completi in listaOut
+            cardNumber.setCardNo(listIn.get(i));
+            if(cardNumber.isLengthCorrect())
+            listOut.add(cardNumber.getFullCardNumber());
+            //System.out.println(i);
+        }
+        for (i = 0; i < listOut.size(); i++) {                      //Stampo listOut su file
+            writer.append(" ");
+            writer.append(listOut.get(i));
+            // System.out.println(i);
+        }
+
+        reader.close();
+        writer.close();
+    }
+}
+
