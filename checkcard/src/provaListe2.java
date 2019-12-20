@@ -13,7 +13,7 @@ public class provaListe2 {
         BufferedReader reader = new BufferedReader(new FileReader(fileIn));
         List<String> listIn = new ArrayList<String>();
         List<String> listOut = new ArrayList<String>();
-        //Prendo i codici dal file e li inserisco nella lista listIn
+        								//Prendo i codici dal file e li inserisco nella lista listIn
         while ((s = reader.readLine()) != null) listIn.add(s);
         reader.close();
         for (i = 0; i < listIn.size(); i++) {                        //Utilizzo l'oggetto 'cardnumber' usando i codici di listaIn e inserisco i codici completi in listOut
