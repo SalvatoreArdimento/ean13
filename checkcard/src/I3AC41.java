@@ -17,8 +17,8 @@ public class I3AC41 {
                 writer.append(cardNumber.getFullCardNumber());
             }
             else
-                if (s.length()==13)
-                      if(CardNumber.isCorrect(s))
+                if (cardNumber.getCardNo().length()==13)
+                      if(cardNumber.isCorrect())
                            System.out.println("il codice "+s+" è corretto");
                          else
                            System.out.println("il codice "+s+" non è corretto");
