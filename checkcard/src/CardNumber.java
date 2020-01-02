@@ -66,7 +66,7 @@ public class CardNumber {
      * @return
      */
     public String getFullCardNumber() {
-        return cardNo + this.checkSum();
+        return cardNo + this.checkSum(); 
     }
 
 
@@ -79,14 +79,14 @@ public class CardNumber {
     }
 
     public boolean isCorrect() {
-        if(this.isLengthCorrect()) {
             String noCheckSumCode;
             int x = Integer.parseInt(this.cardNo.substring(cardNo.length() - 1));
             noCheckSumCode = cardNo.substring(0, cardNo.length() - 1);
             CardNumber test = new CardNumber(noCheckSumCode);
-            return test.checkSum() == x;
-        }
-        return false;
+            if(test.checkSum() == x)
+                return true;
+                else
+                    return false;
     }
 
 

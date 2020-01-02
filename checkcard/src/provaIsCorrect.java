@@ -1,10 +1,11 @@
 public class provaIsCorrect {
-    public static void main (String[] args) {
-        final String NUMERO = "101010101014";
+    public static void main(String[] args) {
+        final String NUMERO = "1010101010104";
         CardNumber cardNumber = new CardNumber(NUMERO);
-
-        System.out.println("Metodo " + cardNumber.isCorrect());
-        System.out.println("Metodo Statico " + CardNumber.isCorrect(NUMERO));
         System.out.println(cardNumber.checkSum());
+
+        System.out.println(cardNumber.isCorrect());
+
+
     }
 }
