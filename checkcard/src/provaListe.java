@@ -18,14 +18,13 @@ public class provaListe {
             s = reader.readLine();
             if (s != null) {
                 listIn.add(s);
-
             }
         } while (s != null);
         reader.close();
         for (i = 0; i < listIn.size(); i++) {                        //Utilizzo l'oggetto 'cardnumber' usando i codici di listaIn e inserisco i codici completi in listOut
             cardNumber.setCardNo(listIn.get(i));
-            if(cardNumber.isLengthCorrect())
-            listOut.add(cardNumber.getFullCardNumber());
+            if (cardNumber.isLengthCorrect())
+                listOut.add(cardNumber.getFullCardNumber());
             //System.out.println(i);
         }
         for (i = 0; i < listOut.size(); i++) {                      //Stampo listOut su file
