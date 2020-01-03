@@ -10,7 +10,7 @@ import java.sql.SQLException;
  */
 public class connessione{
 
-    private final String url = "jdbc:postgresql://172.17.0.2/checkcard";
+    private final String url = "jdbc:postgresql://localhost:5432/checkcard";
     private final String user = "postgres";
     private final String password = "developer2";
 

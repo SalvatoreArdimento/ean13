@@ -12,7 +12,7 @@ public class selectdb {
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager
-                    .getConnection("jdbc:postgresql://172.17.0.2:5432/checkcard",
+                    .getConnection("jdbc:postgresql://localhost:5432/checkcard",
                             "postgres", "developer2");
             c.setAutoCommit(false);
             System.out.println("connessione al db riuscita");
