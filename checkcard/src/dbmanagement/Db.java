@@ -1,6 +1,7 @@
 package dbmanagement;
 
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class Db {
@@ -10,6 +11,7 @@ public class Db {
     private Long status;
     private String statusMsg;
     private Connection conn = null;
+    private ResultSet rs = null;
 
 
     public Connection connect() {
@@ -28,7 +30,12 @@ public class Db {
     public String getStatusMsg() {
         return statusMsg;
     }
-    public Long getStatus() { return status; } ;
+
+    public Long getStatus() {
+        return status;
+    }
+
+    ;
 
     /**
      * Chiude la connessione al Database, nel caso sia attiva
@@ -50,7 +57,7 @@ public class Db {
         connect();
         try {
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = stmt.executeQuery("SELECT * FROM cards;");
+            rs = stmt.executeQuery("SELECT * FROM cards;");
             boolean bPos = rs.absolute(n);
             card.setId(rs.getInt("id"));
             card.setCardNo(rs.getString("cardNo"));
@@ -67,7 +74,7 @@ public class Db {
     }
 
 
-    private void setState (SQLException e) {
+    private void setState(SQLException e) {
         if (e == null) {
             this.status = 0L;
             this.statusMsg = "";
@@ -75,9 +82,94 @@ public class Db {
             this.status = Long.valueOf(e.getSQLState());
             this.statusMsg = e.getMessage();
         }
+    }
+
+    public Card readfirst() {
+        try {
+            Statement stmt = null;
+            Card card = new Card();
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmt.executeQuery("SELECT * FROM cards;");
+            rs.first();
+            card.setId(rs.getInt("id"));
+            card.setCardNo(rs.getString("cardNo"));
+            return card;
+
+
+        } catch (SQLException e) {
+            setState(e);
+            Card card = null;
+            return card;
+
+        }
+
 
     }
+
+    public Card readlast() {
+        try {
+            Statement stmt = null;
+            Card card = new Card();
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmt.executeQuery("SELECT * FROM cards;");
+            rs.last();
+            card.setId(rs.getInt("id"));
+            card.setCardNo(rs.getString("cardNo"));
+            return card;
+
+
+        } catch (SQLException e) {
+            setState(e);
+            Card card = null;
+            return card;
+
+        }
+
+    }
+
+    public void readnext() {
+       try {
+           if (rs != null && rs.isLast()) {
+               rs.next();
+           }
+       }catch (SQLException e) {
+           setState(e);
+       }
+
+       }
+
+       public Card read(){
+           try {
+               Statement stmt = null;
+               Card card = new Card();
+               stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+               rs = stmt.executeQuery("SELECT * FROM cards;");
+               card.setId(rs.getInt("id"));
+               card.setCardNo(rs.getString("cardNo"));
+               status=0L;
+               return card;
+
+
+           } catch (SQLException e) {
+               setState(e);
+               Card card = null;
+               return card;
+
+           }
+
+       }
+
+
+
+
 }
+
+
+
+
+
+
+
 
 
 
