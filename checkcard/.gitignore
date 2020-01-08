@@ -1,3 +1,5 @@
 out/**
 .idea/**
 ./checkcard.iml
+checkcard.iml
+.idea/
