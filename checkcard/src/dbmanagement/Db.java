@@ -1,8 +1,7 @@
 package dbmanagement;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
+import java.sql.*;
 
 public class Db {
     private final String url = "jdbc:postgresql://localhost:5432/checkcard";
@@ -39,7 +38,30 @@ public class Db {
         } else
             System.out.println("nessuna connessione da chiudere");
     }
+
+    public Card read(int n) throws SQLException {
+        Statement stmt = null;
+        Card card = new Card();
+        connect();
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM cards;");
+        rs.absolute(n);
+        card.setId(rs.getInt("id"));
+        card.setCardNo(rs.getString("cardNo"));
+        rs.close();
+        stmt.close();
+        close();
+        return card;
+
+    }
 }
+
+
+
+
+
+
+
 
 
 
