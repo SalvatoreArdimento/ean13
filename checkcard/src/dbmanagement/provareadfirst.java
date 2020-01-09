@@ -5,7 +5,7 @@ public class provareadfirst {
         Db db = new Db();
         db.connect();
         Card card = new Card();
-        card = db.readfirst();
+        card = db.readFirst();
         if (db.getStatus()==0L) {
             System.out.println("CardNo " + card.getCardNo());
             System.out.println("id " + card.getId());

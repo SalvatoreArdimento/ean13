@@ -5,7 +5,7 @@ import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class Db {
-    private final String url = "jdbc:postgresql://10.99.88.154:5432/checkcard";
+    private final String url = "jdbc:postgresql://127.0.0.1/checkcard";
     private final String user = "postgres";
     private final String password = "developer2";
     private Long status;
@@ -84,85 +84,125 @@ public class Db {
         }
     }
 
-    public Card readfirst() {
+    public Card readFirst() {
         try {
-            Statement stmt = null;
-            Card card = new Card();
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = stmt.executeQuery("SELECT * FROM cards;");
             rs.first();
-            card.setId(rs.getInt("id"));
-            card.setCardNo(rs.getString("cardNo"));
-            return card;
+            statusMsg = "Operazione riuscita";
+            status = 0L;
+            return read();
 
 
         } catch (SQLException e) {
             setState(e);
-            Card card = null;
-            return card;
+            return null;
 
         }
 
-
     }
 
-    public Card readlast() {
+    public Card readLast() {
         try {
-            Statement stmt = null;
-            Card card = new Card();
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = stmt.executeQuery("SELECT * FROM cards;");
-            rs.last();
-            card.setId(rs.getInt("id"));
-            card.setCardNo(rs.getString("cardNo"));
-            return card;
+         rs.last();
+         statusMsg = "Operazione riuscita";
+         status = 0L;
+         return read();
 
 
         } catch (SQLException e) {
             setState(e);
-            Card card = null;
-            return card;
+            return null;
 
         }
 
     }
 
-    public void readnext() {
-       try {
-           if (rs != null && rs.isLast()) {
-               rs.next();
-           }
-       }catch (SQLException e) {
-           setState(e);
-       }
+    public void readNext() {
+        try {
+                if(!rs.isLast())
+                rs.next();
+                status=0L;
+                statusMsg="Operazione di scorrimento riuscita";
 
-       }
+        } catch (SQLException e) {
+            setState(e);
+        }
 
-       public Card read(){
-           try {
-               Statement stmt = null;
-               Card card = new Card();
-               stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-               rs = stmt.executeQuery("SELECT * FROM cards;");
-               card.setId(rs.getInt("id"));
-               card.setCardNo(rs.getString("cardNo"));
-               status=0L;
-               return card;
+    }
 
-
-           } catch (SQLException e) {
-               setState(e);
-               Card card = null;
-               return card;
-
-           }
-
-       }
+    public Card read() {
+        try {
+            Card card = new Card();
+            card.setId(rs.getInt("id"));
+            card.setCardNo(rs.getString("cardNo"));
+            status = 0L;
+            statusMsg="Operazione di read riuscita";
+            return card;
 
 
+        } catch (SQLException e) {
+            setState(e);
+            return null;
+
+        }
+    }
+
+    public void openResultSet() {
+        if (conn != null) {
+            try {
+                Statement stmt = null;
+                stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                rs = stmt.executeQuery("SELECT * FROM cards;");
+                status = 0L;
+                statusMsg = "Operazione di apertura ResultSet riuscita";
+            } catch (SQLException e) {
+                setState(e);
+            }
+
+        } else
+            statusMsg = "non connesso al db";
 
 
+    }
+
+    public void closeResultSet() {
+        try {
+            rs.close();
+            status = 0L;
+            statusMsg = "Operazione di chiusura ResultSet riuscita";
+        } catch (SQLException e) {
+            setState(e);
+        }
+    }
+
+    public boolean isLast(){
+        try{
+        if (rs.isLast())
+            return true;
+            else
+            return false;
+        }catch(SQLException e){
+            setState(e);
+            return false;
+            }
+
+
+    }
+
+    public boolean isFirst(){
+        try{
+            if (rs.isLast())
+                return true;
+            else
+                return false;
+        }catch(SQLException e){
+            setState(e);
+            return false;
+        }
+
+
+    }
 }
+
 
 
 
