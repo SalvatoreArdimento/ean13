@@ -5,7 +5,8 @@ import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class Db {
-    private final String url = "jdbc:postgresql://127.0.0.1/checkcard";
+    private final String url = "jdbc:postgresql://10.99.88.154:5432/checkcard";
+    // private final String url = "jdbc:postgresql://localhost:5432/checkcard";
     private final String user = "postgres";
     private final String password = "developer2";
     private Long status;

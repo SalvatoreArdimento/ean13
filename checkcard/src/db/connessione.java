@@ -9,7 +9,6 @@ import java.sql.SQLException;
  * @author postgresqltutorial.com
  */
 public class connessione{
-
     private final String url = "jdbc:postgresql://localhost:5432/checkcard";
     private final String user = "postgres";
     private final String password = "developer2";
