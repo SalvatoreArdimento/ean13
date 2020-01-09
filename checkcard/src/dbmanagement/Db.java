@@ -16,7 +16,6 @@ public class Db {
     private String target;
 
 
-
     public Connection connect() {
         if (conn == null) {
             try {
@@ -181,10 +180,7 @@ public class Db {
     public boolean isLast() {
         try {
             status = 0L;
-            if (rs.isLast())
-                return true;
-            else
-                return false;
+            return rs.isLast();
         } catch (SQLException e) {
             setState(e);
             return false;
@@ -195,10 +191,8 @@ public class Db {
 
     public boolean isFirst() {
         try {
-            if (rs.isLast())
-                return true;
-            else
-                return false;
+            status = 0L;
+            return rs.isFirst();
         } catch (SQLException e) {
             setState(e);
             return false;
@@ -208,83 +202,70 @@ public class Db {
     }
 
     public void setSelectTarget() {
-            target="SELECT * FROM cards;";
-            status = 0L;
-
+        target = "SELECT * FROM cards;";
+        status = 0L;
 
 
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setSelectTarget(int id) {
 
-            target ="SELECT * FROM cards WHERE id="+id+";";
-            status = 0L;
-
-        }
-    public void setSelectTarget(String cardno) {
-
-        target ="SELECT * FROM cards WHERE cardno="+cardno+";";
+        target = "SELECT * FROM cards WHERE id=" + id + ";";
         status = 0L;
 
     }
 
-    public void update(int idTarget, String cardno){
+    /**
+     * Ritorna un oggetto Card corrispondente al numero di carta `cardno`.
+     * @param cardno
+     * @return  <code>null</code> se non trova nulla
+     */
+    public Card find(String cardno) {
+        target = "SELECT * FROM cards WHERE cardno= " + cardno + ";";
+        status = 0L;
+
+    }
+
+    public void update(int idTarget, String cardno) {
         try {
             Statement stmt = null;
             stmt = conn.createStatement();
-            stmt.executeUpdate("UPDATE cards set cardno="+cardno+" where id ="+idTarget+";");
+            stmt.executeUpdate("UPDATE cards set cardno=" + cardno + " where id =" + idTarget + ";");
             status = 0L;
             stmt.close();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             setState(e);
         }
 
     }
 
-    public void update(Card card){
+    public void update(Card card) {
         try {
             Statement stmt = null;
             stmt = conn.createStatement();
-            stmt.executeUpdate("UPDATE cards set cardno="+card.getCardNo()+" where id ="+card.getId()+";");
+            stmt.executeUpdate("UPDATE cards set cardno=" + card.getCardNo() + " where id =" + card.getId() + ";");
             status = 0L;
             stmt.close();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             setState(e);
         }
 
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         try {
             Statement stmt = null;
             stmt = conn.createStatement();
-            stmt.executeUpdate("DELETE from cards WHERE id="+id+";");
+            stmt.executeUpdate("DELETE from cards WHERE id=" + id + ";");
             status = 0L;
             stmt.close();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             setState(e);
         }
 
     }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
