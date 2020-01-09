@@ -250,11 +250,13 @@ public class Db {
 
     public void update(int idTarget, String cardno) {
         try {
+            connect();
             Statement stmt = null;
             stmt = conn.createStatement();
             stmt.executeUpdate("UPDATE cards set cardno=" + cardno + " where id =" + idTarget + ";");
             status = 0L;
             stmt.close();
+            close();
         } catch (SQLException e) {
             setState(e);
         }
@@ -269,6 +271,7 @@ public class Db {
             status = 0L;
             statusMsg = "Record updated!";
             stmt.close();
+            close();
         } catch (SQLException e) {
             setState(e);
         }
@@ -277,11 +280,13 @@ public class Db {
 
     public void delete(int id) {
         try {
+            connect();
             Statement stmt = null;
             stmt = conn.createStatement();
             stmt.executeUpdate("DELETE from cards WHERE id=" + id + ";");
             status = 0L;
             stmt.close();
+            close();
         } catch (SQLException e) {
             setState(e);
         }
