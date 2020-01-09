@@ -6,7 +6,7 @@ public class provareadnext {
         int i;
         Card card = new Card();
         db.connect();
-        db.setSelectTarget(2);
+        db.find(2);
         db.openResultSet();
         for(i=0;i<2;i++) {
             db.readNext();

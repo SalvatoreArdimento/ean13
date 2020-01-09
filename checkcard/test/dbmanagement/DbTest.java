@@ -30,42 +30,21 @@ class DbTest {
     }
 
     @Test
-    void read() {
+    void provaFind() {
         Db db = new Db();
-        int i=0;
         Card card = new Card();
         db.connect();
-        db.setSelectTarget();
-        db.openResultSet();
-        while(!db.isLast()) {
-            db.readNext();
-            card = db.read();
-            i++;
-        }
-        assertTrue(i==1);
+        card=db.find(2);
+        System.out.println(db.getStatusMsg());
         db.closeResultSet();
         db.close();
-
-
-
-    }
-    @Test
-    void selectTarget() {
-        Db db = new Db();
-        Card card = new Card();
-        db.connect();
-        db.setSelectTarget(2);
-        db.openResultSet();
-        db.readNext();
-        card = db.read();
         assertTrue(card.getId()==2);
-        System.out.println(card.getCardNo());
-        db.closeResultSet();
-        db.close();
+
 
 
 
     }
+
 
     @Test
     void updateTest(){
@@ -73,9 +52,7 @@ class DbTest {
         Card card = new Card();
         db.connect();
         db.update(2,"101010101016");
-        db.openResultSet();
-        db.setSelectTarget(2);
-        card=db.read();
+
 
 
     }

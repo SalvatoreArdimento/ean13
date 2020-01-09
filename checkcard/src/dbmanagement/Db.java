@@ -201,21 +201,26 @@ public class Db {
 
     }
 
-    public void setSelectTarget() {
-        target = "SELECT * FROM cards;";
-        status = 0L;
-
-
-    }
 
     /**
      *
      * @param id
      */
-    public void setSelectTarget(int id) {
-
+    public Card find(int id) {
+        Card card = new Card();
         target = "SELECT * FROM cards WHERE id=" + id + ";";
+        openResultSet();
+        readFirst();
         status = 0L;
+        card=read();
+            if (card!=null){
+                statusMsg = "Operazione conclusa con successo";
+                return card;
+            }
+            else{
+                statusMsg = "Record non trovato";
+                return card;
+            }
 
     }
 
@@ -225,10 +230,23 @@ public class Db {
      * @return  <code>null</code> se non trova nulla
      */
     public Card find(String cardno) {
+        Card card = new Card();
         target = "SELECT * FROM cards WHERE cardno= " + cardno + ";";
+        openResultSet();
+        readFirst();
         status = 0L;
+        card=read();
+        if (card!=null){
+            statusMsg = "Operazione conclusa con successo";
+            return card;
+        }
+        else{
+            statusMsg = "Record non trovato";
+            return card;
+        }
 
     }
+
 
     public void update(int idTarget, String cardno) {
         try {
