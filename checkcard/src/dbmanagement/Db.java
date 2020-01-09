@@ -263,10 +263,11 @@ public class Db {
 
     public void update(Card card) {
         try {
-            Statement stmt = null;
-            stmt = conn.createStatement();
+            connect();
+            Statement stmt = conn.createStatement();
             stmt.executeUpdate("UPDATE cards set cardno=" + card.getCardNo() + " where id =" + card.getId() + ";");
             status = 0L;
+            statusMsg = "Record updated!";
             stmt.close();
         } catch (SQLException e) {
             setState(e);
