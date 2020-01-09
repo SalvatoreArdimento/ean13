@@ -29,6 +29,65 @@ class DbTest {
         db.close();
     }
 
+    @Test
+    void read() {
+        Db db = new Db();
+        int i=0;
+        Card card = new Card();
+        db.connect();
+        db.setSelectTarget();
+        db.openResultSet();
+        while(!db.isLast()) {
+            db.readNext();
+            card = db.read();
+            i++;
+        }
+        assertTrue(i==1);
+        db.closeResultSet();
+        db.close();
+
+
+
+    }
+    @Test
+    void selectTarget() {
+        Db db = new Db();
+        Card card = new Card();
+        db.connect();
+        db.setSelectTarget(2);
+        db.openResultSet();
+        db.readNext();
+        card = db.read();
+        assertTrue(card.getId()==2);
+        System.out.println(card.getCardNo());
+        db.closeResultSet();
+        db.close();
+
+
+
+    }
+
+    @Test
+    void updateTest(){
+        Db db = new Db();
+        Card card = new Card();
+        db.connect();
+        db.update(2,"101010101016");
+        db.openResultSet();
+        db.setSelectTarget(2);
+        card=db.read();
+
+
+    }
+    @Test
+    void deleteTest(){
+        Db db = new Db();
+        db.connect();
+        db.delete(2);
+        db.close();
+    }
+    }
+
 /*
     @Test
     void getStatusMsg() {
@@ -42,9 +101,6 @@ class DbTest {
     void close() {
     }
 
-    @org.junit.jupiter.api.Test
-    void read() {
-    }
 
     @org.junit.jupiter.api.Test
     void readFirst() {
@@ -77,4 +133,3 @@ class DbTest {
     @org.junit.jupiter.api.Test
     void isFirst() {
 */
-}

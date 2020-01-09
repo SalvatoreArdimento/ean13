@@ -5,14 +5,16 @@ import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class Db {
-    private final String url = "jdbc:postgresql://10.99.88.154:5432/checkcard";
-    // private final String url = "jdbc:postgresql://localhost:5432/checkcard";
+    //private final String url = "jdbc:postgresql://10.99.88.154:5432/checkcard";
+    private final String url = "jdbc:postgresql://localhost:5432/checkcard";
     private final String user = "postgres";
     private final String password = "developer2";
     private Long status;
     private String statusMsg;
     private Connection conn = null;
     private ResultSet rs = null;
+    private String target;
+
 
 
     public Connection connect() {
@@ -58,7 +60,6 @@ public class Db {
         connect();
         try {
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = stmt.executeQuery("SELECT * FROM cards;");
             boolean bPos = rs.absolute(n);
             card.setId(rs.getInt("id"));
             card.setCardNo(rs.getString("cardNo"));
@@ -103,10 +104,10 @@ public class Db {
 
     public Card readLast() {
         try {
-         rs.last();
-         statusMsg = "Operazione riuscita";
-         status = 0L;
-         return read();
+            rs.last();
+            statusMsg = "Operazione riuscita";
+            status = 0L;
+            return read();
 
 
         } catch (SQLException e) {
@@ -119,10 +120,10 @@ public class Db {
 
     public void readNext() {
         try {
-                if(!rs.isLast())
+            if (!rs.isLast())
                 rs.next();
-                status=0L;
-                statusMsg="Operazione di scorrimento riuscita";
+            status = 0L;
+            statusMsg = "Operazione di scorrimento riuscita";
 
         } catch (SQLException e) {
             setState(e);
@@ -136,7 +137,7 @@ public class Db {
             card.setId(rs.getInt("id"));
             card.setCardNo(rs.getString("cardNo"));
             status = 0L;
-            statusMsg="Operazione di read riuscita";
+            statusMsg = "Operazione di read riuscita";
             return card;
 
 
@@ -152,15 +153,17 @@ public class Db {
             try {
                 Statement stmt = null;
                 stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                rs = stmt.executeQuery("SELECT * FROM cards;");
+                rs = stmt.executeQuery(target);
                 status = 0L;
                 statusMsg = "Operazione di apertura ResultSet riuscita";
             } catch (SQLException e) {
                 setState(e);
             }
 
-        } else
+        } else {
             statusMsg = "non connesso al db";
+            status = 403L;
+        }
 
 
     }
@@ -175,34 +178,97 @@ public class Db {
         }
     }
 
-    public boolean isLast(){
-        try{
-        if (rs.isLast())
-            return true;
-            else
-            return false;
-        }catch(SQLException e){
-            setState(e);
-            return false;
-            }
-
-
-    }
-
-    public boolean isFirst(){
-        try{
+    public boolean isLast() {
+        try {
+            status = 0L;
             if (rs.isLast())
                 return true;
             else
                 return false;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             setState(e);
             return false;
         }
 
 
     }
-}
+
+    public boolean isFirst() {
+        try {
+            if (rs.isLast())
+                return true;
+            else
+                return false;
+        } catch (SQLException e) {
+            setState(e);
+            return false;
+        }
+
+
+    }
+
+    public void setSelectTarget() {
+            target="SELECT * FROM cards;";
+            status = 0L;
+
+
+
+    }
+
+    public void setSelectTarget(int id) {
+
+            target ="SELECT * FROM cards WHERE id="+id+";";
+            status = 0L;
+
+        }
+    public void setSelectTarget(String cardno) {
+
+        target ="SELECT * FROM cards WHERE cardno="+cardno+";";
+        status = 0L;
+
+    }
+
+    public void update(int idTarget, String cardno){
+        try {
+            Statement stmt = null;
+            stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE cards set cardno="+cardno+" where id ="+idTarget+";");
+            status = 0L;
+            stmt.close();
+        }catch (SQLException e){
+            setState(e);
+        }
+
+    }
+
+    public void update(Card card){
+        try {
+            Statement stmt = null;
+            stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE cards set cardno="+card.getCardNo()+" where id ="+card.getId()+";");
+            status = 0L;
+            stmt.close();
+        }catch (SQLException e){
+            setState(e);
+        }
+
+    }
+
+    public void delete(int id){
+        try {
+            Statement stmt = null;
+            stmt = conn.createStatement();
+            stmt.executeUpdate("DELETE from cards WHERE id="+id+";");
+            status = 0L;
+            stmt.close();
+        }catch (SQLException e){
+            setState(e);
+        }
+
+    }
+    }
+
+
 
 
 
