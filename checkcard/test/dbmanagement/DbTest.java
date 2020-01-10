@@ -49,9 +49,8 @@ class DbTest {
     @Test
     void updateTest(){
         Db db = new Db();
-        Card card = new Card();
-        db.connect();
-        db.update(2,"101010101016");
+        db.update(7,"111111111116");
+        assertTrue(db.getStatus()==0L);
 
 
 
@@ -59,9 +58,9 @@ class DbTest {
     @Test
     void deleteTest(){
         Db db = new Db();
-        db.connect();
         db.delete(2);
-        db.close();
+        assertTrue(db.getStatus()==0L);
+
     }
     }
 
