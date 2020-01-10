@@ -1,6 +1,6 @@
+import CardNumber.CardNumber;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class I3AC41 {
     public static void main(String[] args) throws IOException {

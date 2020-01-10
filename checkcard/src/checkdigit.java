@@ -1,3 +1,5 @@
+import CardNumber.CardNumber;
+
 public class checkdigit {
     public static void main(String[] args) {
         String carteInput[] = new String[4];

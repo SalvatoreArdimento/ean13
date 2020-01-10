@@ -1,3 +1,5 @@
+import CardNumber.CardNumber;
+
 public class provaIsCorrect {
     public static void main(String[] args) {
         final String NUMERO = "1010101010104";
