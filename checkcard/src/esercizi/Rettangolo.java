@@ -8,7 +8,7 @@ public class Rettangolo {
         this.base = base;
     }
 
-    public void setLato(double lato) {
+    public void setAltezza(double lato) {
         this.altezza = lato;
 
     }

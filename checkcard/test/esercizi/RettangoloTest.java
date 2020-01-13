@@ -9,7 +9,7 @@ class RettangoloTest {
     @Test
     void calcolaPerimetro() {
         Rettangolo rettangolo = new Rettangolo();
-        rettangolo.setLato(4);
+        rettangolo.setAltezza(4);
         rettangolo.setBase(6);
         assertTrue(rettangolo.perimetro()==20);
     }
@@ -17,7 +17,7 @@ class RettangoloTest {
     @Test
     void calcolaArea() {
         Rettangolo rettangolo = new Rettangolo();
-        rettangolo.setLato(4);
+        rettangolo.setAltezza(4);
         rettangolo.setBase(6);
 
         assertTrue(rettangolo.area()==24);
@@ -27,7 +27,7 @@ class RettangoloTest {
     void calcolaDiametro(){
         Rettangolo rettangolo = new Rettangolo();
         rettangolo.setBase(15);
-        rettangolo.setLato(8);
+        rettangolo.setAltezza(8);
         assertTrue(rettangolo.diagonale()==17);
     }
 }

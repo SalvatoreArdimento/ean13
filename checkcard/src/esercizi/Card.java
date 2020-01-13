@@ -49,12 +49,12 @@ public class Card {
     }
     public boolean valida(){
         Date date = new Date();
-     //  SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-    //    System.out.println(formatter.format(date));
-        if (date.before(dataScadenza))
-            return true;
-        else
-            return false;
+//       SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+//        System.out.println(formatter.format(date));
+//        SimpleDateFormat formatter1= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+//        System.out.println(formatter.format(getDataScadenza()));
+             return date.before(dataScadenza);
+
 
     }
 

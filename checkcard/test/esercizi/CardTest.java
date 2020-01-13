@@ -42,10 +42,18 @@ class CardTest {
 
     @Test
     void valida() {
+
         Card card = new Card();
-        Date date = new Date(2021,21,01);
+        Date date = new Date(120,1,01);
         card.setDataScadenza(date);
         assertTrue(card.valida()==true);
-        // Aggiungere un test con la data dopo la scadenza
+    }
+    @Test
+    void nonValida() {
+        Card card = new Card();
+        Date date = new Date(119,1,01);
+        card.setDataScadenza(date);
+        assertTrue(card.valida()==false);
+
     }
 }
