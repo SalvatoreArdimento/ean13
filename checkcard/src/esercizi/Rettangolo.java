@@ -12,10 +12,10 @@ public class Rettangolo {
         this.altezza = lato;
 
     }
-    public double calcolaPerimetro(){
+    public double perimetro(){
         return (altezza *2)+(base*2);
     }
-    public double calcolaArea(){
+    public double area(){
         return base* altezza;
     }
 
@@ -27,7 +27,7 @@ public class Rettangolo {
         return altezza;
     }
 
-    public double calcolaDiagonale(){
+    public double diagonale(){
         return Math.sqrt((getAltezza()* getAltezza())+(getBase()*getBase()));
 
     }

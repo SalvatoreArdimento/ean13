@@ -11,7 +11,7 @@ class RettangoloTest {
         Rettangolo rettangolo = new Rettangolo();
         rettangolo.setLato(4);
         rettangolo.setBase(6);
-        assertTrue(rettangolo.calcolaPerimetro()==20);
+        assertTrue(rettangolo.perimetro()==20);
     }
 
     @Test
@@ -20,7 +20,7 @@ class RettangoloTest {
         rettangolo.setLato(4);
         rettangolo.setBase(6);
 
-        assertTrue(rettangolo.calcolaArea()==24);
+        assertTrue(rettangolo.area()==24);
 
     }
     @Test
@@ -28,6 +28,6 @@ class RettangoloTest {
         Rettangolo rettangolo = new Rettangolo();
         rettangolo.setBase(15);
         rettangolo.setLato(8);
-        assertTrue(rettangolo.calcolaDiagonale()==17);
+        assertTrue(rettangolo.diagonale()==17);
     }
 }

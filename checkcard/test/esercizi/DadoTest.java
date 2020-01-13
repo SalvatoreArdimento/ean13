@@ -18,7 +18,6 @@ class DadoTest {
                 count++;
 
             }
-
         }
         assertTrue(count==100);
     }

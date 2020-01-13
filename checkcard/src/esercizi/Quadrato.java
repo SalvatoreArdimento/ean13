@@ -9,7 +9,7 @@ public class Quadrato extends Rettangolo {
     }
 
     @Override
-    public double calcolaDiagonale() {
+    public double diagonale() {
        return getAltezza()*Math.sqrt(2);
     }
 }

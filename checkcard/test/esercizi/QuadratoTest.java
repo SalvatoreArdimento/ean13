@@ -10,7 +10,7 @@ class QuadratoTest {
     void calcolaDiagonale() {
         Quadrato quadrato = new Quadrato();
         quadrato.setLato(6);
-        int diagonale=(int)quadrato.calcolaDiagonale();
+        int diagonale=(int)quadrato.diagonale();
         System.out.println(diagonale);
         assertTrue(diagonale==8);
     }
@@ -19,12 +19,12 @@ class QuadratoTest {
     void calcolaPerimetro(){
         Quadrato quadrato = new Quadrato();
         quadrato.setLato(8);
-        assertTrue(quadrato.calcolaPerimetro()==32);
+        assertTrue(quadrato.perimetro()==32);
     }
     @Test
     void calcolaArea(){
         Quadrato quadrato = new Quadrato();
         quadrato.setLato(8);
-        assertTrue(quadrato.calcolaArea()==64);
+        assertTrue(quadrato.area()==64);
     }
 }
